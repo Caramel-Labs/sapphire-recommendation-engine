@@ -36,7 +36,7 @@ exports.processData = async (req, res) => {
   try {
     // Make a request to the external server
     const response = await axios.post(
-      "http://external-server.com/api/process",
+      "https://run.mocky.io/v3/e131e0e6-824a-4333-818b-4a86388ccfb6",
       {
         interests,
         places,
@@ -44,12 +44,12 @@ exports.processData = async (req, res) => {
     );
 
     const { favouredPlaces, recommendedPlaces } = response.data;
+    console.log(response.data);
 
     // Compose the email content using a separate template
     const emailContent = emailTemplate(
       favouredPlaces,
       recommendedPlaces,
-      email,
       userName
     );
 
@@ -57,7 +57,8 @@ exports.processData = async (req, res) => {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
-      subject: "Processed Interests and Places",
+      subject:
+        "Your Visa to Sri Lanka is Approved! Explore Recommended Destinations for Your Trip",
       html: emailContent,
     });
 

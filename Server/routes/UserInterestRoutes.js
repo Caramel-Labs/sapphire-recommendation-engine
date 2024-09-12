@@ -6,7 +6,7 @@ const {
 const router = express.Router();
 
 // Route to process data
-router.post("/process-data", processData);
+router.post("/travel/recommendations", processData);
 
 // Route to get all interests
 router.get("/interests", getAllInterests);
