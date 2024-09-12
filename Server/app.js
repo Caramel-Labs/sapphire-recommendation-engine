@@ -2,7 +2,7 @@ const express = require("express");
 const connectDB = require("./config/Database");
 const cors = require("cors");
 
-//const visaRoutes = require("./routes/visaRoutes");
+const interestRoutes = require("./routes/UserInterestRoutes");
 
 const app = express();
 
@@ -14,6 +14,6 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 // Set up routes
-//app.use("/api/visa", visaRoutes);
+app.use("/api", interestRoutes);
 
 module.exports = app;
