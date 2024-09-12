@@ -1,20 +1,39 @@
 'use client'
 
-import{ useState } from 'react';
+import{ useState,useEffect } from 'react';
 import BackButton from '@/app/components/backButton'
 import { useFormState } from "@/app/context/formContext"
 
-const interests = [
-  'Adventure', 'Nature', 'Food', 'Photography', 'Bird Watching', 'Beaches',
-  'Ayurveda and Wellness', 'Cityscapes', 'Aquariums and Zoos', 'Architecture',
-  'Cycling', 'Culture', 'Hot Springs', 'Night Life', 'Hiking', 'History',
-  'Festivals', 'Eco-Tourism', 'Safari and Wildlife', 'Whale Watching',
-  'Surfing', 'Diving', 'Sailing'
-];
+// const interests = [
+//   'Adventure', 'Nature', 'Food', 'Photography', 'Bird Watching', 'Beaches',
+//   'Ayurveda and Wellness', 'Cityscapes', 'Aquariums and Zoos', 'Architecture',
+//   'Cycling', 'Culture', 'Hot Springs', 'Night Life', 'Hiking', 'History',
+//   'Festivals', 'Eco-Tourism', 'Safari and Wildlife', 'Whale Watching',
+//   'Surfing', 'Diving', 'Sailing'
+// ];
 
 export default function InterestSelection() {
   const [selectedInterests, setSelectedInterests] = useState([])
-    const { onHandleBack,setFormData, onHandleNext } = useFormState()
+  const { onHandleBack,setFormData, onHandleNext } = useFormState()
+  const[interests,setInterests] = useState([])
+
+  useEffect(() => {
+
+    const fetchInterests = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/interests');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setInterests(data);
+      } catch (error) {
+        console.error('Error fetching interests:', error.message);
+        setInterests([]);
+      }
+    };
+    fetchInterests();
+  }, []);
 
   const toggleInterest = (interest) => {
     setSelectedInterests(prevInterests =>
@@ -46,7 +65,7 @@ export default function InterestSelection() {
       </p>
 
       <div className="flex flex-wrap gap-2 mb-8">
-        {interests.map((interest) => (
+        {interests && interests.map((interest) => (
           <button
             key={interest}
             onClick={() => toggleInterest(interest)}
