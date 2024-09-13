@@ -1,7 +1,7 @@
 'use client'
 
 import{ useState,useEffect } from 'react';
-import BackButton from '@/app/components/surveyBackButton'
+import SurveyBackButton from '@/app/components/surveyBackButton'
 import { useFormState } from "@/app/context/formContext"
 import SurveyBackButton from '@/app/components/surveyBackButton';
 
