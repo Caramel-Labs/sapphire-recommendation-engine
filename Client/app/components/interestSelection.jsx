@@ -3,7 +3,6 @@
 import{ useState,useEffect } from 'react';
 import SurveyBackButton from '@/app/components/surveyBackButton'
 import { useFormState } from "@/app/context/formContext"
-import SurveyBackButton from '@/app/components/surveyBackButton';
 
 // const interests = [
 //   'Adventure', 'Nature', 'Food', 'Photography', 'Bird Watching', 'Beaches',
