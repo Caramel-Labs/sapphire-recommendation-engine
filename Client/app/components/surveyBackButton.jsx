@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function BackButton(props) {
+export default function SurveyBackButton(props) {
   return (
     <header className="flex items-center pt-8">
       <button onClick={props.onHandleBack}>

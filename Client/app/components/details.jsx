@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react';
-import BackButton from '@/app/components/BackButton'
+import BackButton from '@/app/components/surveyBackButton'
 import { useFormState } from "@/app/context/formContext"
+import SurveyBackButton from '@/app/components/surveyBackButton';
 
 export default function Details() {
   const [name, setName] = useState('');
@@ -24,7 +25,7 @@ export default function Details() {
     <div className="max-w-md mx-auto bg-white min-h-screen pb-10 ">
 
       {/* Back Button */}
-      <BackButton onHandleBack={onHandleBack} />
+      <SurveyBackButton onHandleBack={onHandleBack} />
 
       {/* Heading */}
       <h2 className="text-black text-[22px] font-semibold text-center mt-4"></h2>

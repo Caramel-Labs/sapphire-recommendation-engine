@@ -1,8 +1,9 @@
 'use client'
 
 import{ useState,useEffect } from 'react';
-import BackButton from '@/app/components/backButton'
+import BackButton from '@/app/components/surveyBackButton'
 import { useFormState } from "@/app/context/formContext"
+import SurveyBackButton from '@/app/components/surveyBackButton';
 
 // const interests = [
 //   'Adventure', 'Nature', 'Food', 'Photography', 'Bird Watching', 'Beaches',
@@ -52,7 +53,7 @@ export default function InterestSelection() {
   return (
     <div className="bg-white min-h-screen p-4">
       {/* Back button */}
-      <BackButton onHandleBack={onHandleBack}/>
+      <SurveyBackButton onHandleBack={onHandleBack}/>
       <div className="mb-6">
         <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
