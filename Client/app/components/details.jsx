@@ -14,8 +14,8 @@ export default function Details() {
   const handleSubmit = () => {
     setFormData({
       ...formData,
-     name,
-    email
+     userName: name,
+     email
     });
     onHandleNext();
   };

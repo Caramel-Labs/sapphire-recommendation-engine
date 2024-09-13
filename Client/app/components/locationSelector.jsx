@@ -1,98 +1,64 @@
-'use client'
+import  { useState } from 'react';
+import { APIProvider } from "@vis.gl/react-google-maps";
+import PlaceAutocomplete from './PlaceAutocomplete'; // Adjust the import path as needed
 
-import { useState } from 'react'
-import BackButton from '@/app/components/backButton';
-import { useFormState } from "@/app/context/formContext"
-// Load API key from environment variable
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+const MAPS_API_KEY = process.env.MAPS_API_KEY; // Make sure this is set in your .env file
 
 export default function LocationSelector() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const { setFormData, onHandleBack,onHandleNext } = useFormState()
+    const [selectedLocations, setSelectedLocations] = useState([]);
+    const [currentPlace, setCurrentPlace] = useState(null);
 
-    const handleContinue = async () => {
-        try {
-            // Step 2: Send the search term to the Google API to get lat and long
-            const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-                searchTerm
-            )}&key=${API_KEY}`;
-            const response = await fetch(url);
-            const data = await response.json();
+    const handlePlaceSelect = (place) => {
+        setCurrentPlace(place);
+    };
 
-            if (data.status === 'OK') {
-                const { lat, lng } = data.results[0].geometry.location;
-
-                // Step 3: Create JSON object
-                const payload = {
-                    latitude: lat,
-                    longitude: lng,
-                    userId: userId,
-                };
-
-                // Step 4: Send the payload to your API
-                const apiResponse = await fetch(
-                    'http://localhost:4000/api/experiences/ai/create',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(payload),
-                    }
-                );
-
-                // Get the result from the response
-                const result = await apiResponse.json();
-                console.log('API Response:', result);
-
-                // Step 5: Extract the _id and navigate to the experience page
-                const experienceId = result.aiExperience._id;
-                router.push(`/experience/${experienceId}`);
-            } else {
-                console.error(
-                    'Error fetching location data:',
-                    data.status,
-                    data.error_message
-                );
-            }
-        } catch (error) {
-            console.error('Error:', error);
+    const addToBucketList = () => {
+        if (currentPlace && selectedLocations.length < 5 && !selectedLocations.some(loc => loc.place_id === currentPlace.place_id)) {
+            setSelectedLocations([...selectedLocations, currentPlace]);
+            setCurrentPlace(null);
         }
     };
 
-    return (
-        <main className="bg-white h-screen text-black p-4">
-            {/* Back Button */}
-            <BackButton onHandleBack={onHandleBack}/>
+    const handleRemoveLocation = (location) => {
+        setSelectedLocations(selectedLocations.filter(loc => loc.place_id !== location.place_id));
+    };
 
-            {/* Heading */}
+    return (
+        <main className="bg-white min-h-screen text-black p-4">
             <h2 className="text-black text-[22px] font-semibold text-center mt-4">
-                Select Region
+                Select Regions
             </h2>
             <p className="text-gray-500 text-xs text-center mt-4 mb-8">
-                Share your details to make your visa processing smoother and
-                your experience more personalized.
+                Select up to 5 locations for your travel bucket list.
             </p>
-
-            {/* Searchbar */}
-            <div className="mb-4">
-                <input
-                    type="text"
-                    placeholder="Where do you want to go?"
-                    className="mt-2 block w-full border border-gray-300 rounded-[8px] shadow-sm p-2 text-xs h-[48px] text-black"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} // Capture the input
-                    required
-                />
+            
+            <div className="mb-4 relative">
+                <APIProvider apiKey={MAPS_API_KEY}>
+                    <PlaceAutocomplete onPlaceSelect={handlePlaceSelect} />
+                </APIProvider>
+                <button
+                    onClick={addToBucketList}
+                    disabled={!currentPlace || selectedLocations.length >= 5}
+                    className="w-full mt-2 py-2 px-4 bg-sapphire text-white rounded-lg text-xs hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 h-[48px] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                    Add to Bucket List
+                </button>
             </div>
-
-            {/* Continue button */}
-            <button
-                onClick={handleContinue} // Attach handler
-                className="w-full mt-[260px] py-2 px-4 bg-sapphire text-white rounded-lg text-xs hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 h-[48px]"
-            >
-                Continue
-            </button>
+            
+            <h3 className="font-semibold mt-4 mb-2">Your Bucket List ({selectedLocations.length}/5):</h3>
+            <ul className="mb-4">
+                {selectedLocations.map((location) => (
+                    <li key={location.place_id} className="flex justify-between items-center mb-2">
+                        <span className="text-xs">{location.formatted_address || location.name}</span>
+                        <button
+                            onClick={() => handleRemoveLocation(location)}
+                            className="text-red-500 text-xs"
+                        >
+                            Remove
+                        </button>
+                    </li>
+                ))}
+            </ul>
         </main>
     );
 }

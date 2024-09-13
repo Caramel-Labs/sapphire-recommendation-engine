@@ -4,7 +4,7 @@ import { useFormState } from "@/app/context/formContext"
 
 
 import Welcome from "./welcome"
-// import LocationSelector from "./locationSelector"
+import LocationSelector from "./locationSelector"
 import Details from "./details"
 import InterestSelection from "./interestSelection"
 import End from "./end"
@@ -13,7 +13,7 @@ export default function SurveyStepForm() {
     const { step } = useFormState()
     switch (step) {
       case 0:
-        return <Welcome />
+        return <LocationSelector />
       case 1: 
         return <Details />
       case 2: 
