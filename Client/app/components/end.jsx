@@ -1,9 +1,9 @@
 export default function End() {
 
     return (
-        <div>
-            <h1>Thank you for completing the survey</h1>
-            <p>Click the button below to submit your answers</p>
+        <div className="flex min-h-screen flex-col  justify-between  bg-sapphire p-4">
+            <h1  className="text-white mt-[360px]  text-center  font-semibold text-xl">Thank you for completing the survey</h1>
+           
         </div>
     )
 }

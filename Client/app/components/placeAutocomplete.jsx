@@ -25,9 +25,9 @@ const PlaceAutocomplete = ({ onPlaceSelect }) => {
   }, [onPlaceSelect, placeAutocomplete]);
 
   return (
-    <div className="autocomplete-container">
-      <input ref={inputRef} placeholder="Search for a place" />
-    </div>
+    // <div className="autocomplete-container ">
+    //   <input ref={inputRef} placeholder="Search for a place" />
+    // </div>
   );
 };
 

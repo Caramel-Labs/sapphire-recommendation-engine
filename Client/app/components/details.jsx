@@ -21,13 +21,13 @@ export default function Details() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white min-h-screen pb-10 ">
+    <div className="max-w-md mx-auto bg-white min-h-screen p-4 ">
 
       {/* Back Button */}
       <SurveyBackButton onHandleBack={onHandleBack} />
 
       {/* Heading */}
-      <h2 className="text-black text-[22px] font-semibold text-center mt-4"></h2>
+      <h2 className="text-black text-[22px] font-semibold text-center mt-4"> Personal Information</h2>
       <p className="text-gray-500 text-xs text-center mt-4 mb-8">
         Share your details to make your vacation enjoyable and your experience more personalized.
       </p>
@@ -58,7 +58,7 @@ export default function Details() {
           />
 
       {/* Continue Button */}
-      <div className="text-center">
+      <div className="text-center mt-[250px]">
         <button
           className="w-full bg-sapphire text-xs text-white py-[16px] px-[103px] rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400  mt-[100px]"
           onClick={handleSubmit}

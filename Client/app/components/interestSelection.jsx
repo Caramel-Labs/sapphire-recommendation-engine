@@ -68,14 +68,14 @@ export default function InterestSelection() {
     <div className="bg-white min-h-screen p-4">
       <SurveyBackButton onHandleBack={onHandleBack}/>
       
-      <h1 className="text-2xl font-bold mb-2">Select your interests</h1>
-      <p className="text-gray-600 mb-6">
+      <h1 className="text-black text-[22px] font-semibold text-center mt-4">Select your interests</h1>
+      <p className="text-gray-500 text-xs text-center mt-4 mb-8">
         Help us tailor your Sri Lankan experience towards your passions and preferences.
       </p>
 
       {interestTypes.map((type) => (
         <div key={type} className="mb-6">
-          <h2 className="text-lg font-semibold mb-2">{type}</h2>
+          <h2 className="text-lg font-semibold mb-2 text-black ">{type}</h2>
           <div className="flex flex-wrap gap-2 mb-4">
             {interestsByType[type]?.map((interest) => (
               <button
@@ -83,7 +83,7 @@ export default function InterestSelection() {
                 onClick={() => toggleInterest(interest)}
                 className={`px-4 py-2 rounded-full text-sm font-medium ${
                   selectedInterests.includes(interest)
-                    ? 'bg-teal-500 text-white'
+                    ? 'bg-sapphire text-white'
                     : 'bg-gray-200 text-gray-800'
                 }`}
               >
@@ -95,7 +95,7 @@ export default function InterestSelection() {
       ))}
 
       <button 
-        className="w-full bg-teal-100 text-teal-700 py-3 rounded-lg font-medium" 
+        className="w-full bg-sapphire text-xs text-white py-[16px] px-[103px] rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400" 
         onClick={handleClick}
       >
         Continue
