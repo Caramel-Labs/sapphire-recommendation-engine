@@ -17,7 +17,7 @@ exports.emailTemplate = (favouredPlaces, recommendedPlaces, userName) => {
         To help you plan your visit, we’ve gathered some recommendations based on your interests and the exciting destinations available. Below are the highlights:
       </p>
 
-      <h2 style="color: #1F618D;">Your Interests:</h2>
+      <h2 style="color: #1F618D;">Your Bucket list:</h2>
       <ul style="font-size: 16px;">
         ${favouredPlaces.map((interest) => `<li>${interest}</li>`).join("")}
       </ul>

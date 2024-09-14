@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import SurveyBackButton from '@/app/components/surveyBackButton'
 import { useFormState } from "@/app/context/formContext"
-import { formatDynamicAPIAccesses } from 'next/dist/server/app-render/dynamic-rendering';
 
 const interestTypes = [
   "Tours and Sightseeing",

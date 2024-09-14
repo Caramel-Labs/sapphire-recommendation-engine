@@ -71,10 +71,10 @@ export default function LocationSelector() {
             <SurveyBackButton onHandleBack={onHandleBack} />
             <div className="flex-grow">
                 <h2 className="text-black text-[22px] font-semibold text-center mt-4">
-                    Select Regions
+                    Select Places
                 </h2>
                 <p className="text-gray-500 text-xs text-center mt-4 mb-8">
-                    Select up to 5 locations for your travel bucket list.
+                    Select up to 5 places for your travel bucket list.
                 </p>
                 
                 <div className="mb-4 relative">
