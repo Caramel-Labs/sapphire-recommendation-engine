@@ -65,7 +65,10 @@ def get_recommendations(interests: TouristInterests):
     model = TFBertModel.from_pretrained("bert-base-uncased")
 
     recommended_places = recommend_places(interests.activities, df, tokenizer, model)
-    return {"recommended_places": recommended_places}
+    return {
+    	"favouredPlaces": interests.activities
+    	"recommendedPlaces": recommended_places,
+    }
 
 
 # Test router health
