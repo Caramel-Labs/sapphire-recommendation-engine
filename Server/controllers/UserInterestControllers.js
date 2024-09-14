@@ -36,15 +36,17 @@ exports.processData = async (req, res) => {
   try {
     // Make a request to the external server
     const response = await axios.post(
-      "https://run.mocky.io/v3/e131e0e6-824a-4333-818b-4a86388ccfb6",
+      "http://localhost:8000/recommender/recommend/",
       {
         interests,
         places,
       }
     );
 
-    const { favouredPlaces, recommendedPlaces } = response.data;
+    const { favouredPlaces , recommendedPlaces } = response.data
     console.log(response.data);
+
+
 
     // Compose the email content using a separate template
     const emailContent = emailTemplate(
