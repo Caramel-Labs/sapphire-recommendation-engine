@@ -66,8 +66,8 @@ def get_recommendations(interests: TouristInterests):
 
     recommended_places = recommend_places(interests.activities, df, tokenizer, model)
     return {
-    	"favouredPlaces": interests.activities
-    	"recommendedPlaces": recommended_places,
+        "favouredPlaces": interests.activities,
+        "recommendedPlaces": recommended_places,
     }
 
 
