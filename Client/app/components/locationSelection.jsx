@@ -12,7 +12,7 @@ export default function LocationSelector() {
 
     const { onHandleBack, setFormData, onHandleNext ,formData } = useFormState();
 
-    const MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY // Use environment variable
+    const MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY // Use environment variable
 
     const handlePlaceSelect = (place) => {
         setCurrentPlace(place.name);
